@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zone.common.UserInformation;
-import com.zone.config.SessionListener;
 import com.zone.signup.SignupDao;
 import com.zone.signup.SignupModel;
 import com.zone.user.UserDao;
@@ -30,7 +29,7 @@ public class DashboardController {
 	@Autowired
 	UserDao userDao;
 	
-	SessionListener sessionListener = new SessionListener();
+	
 	
 	@RequestMapping(value = "/dashboard", method=RequestMethod.GET)
 	public ModelAndView dashboard(HttpServletRequest request){

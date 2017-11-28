@@ -90,11 +90,6 @@ public class AppConfig {
 	}
 	
 	
-	@Bean
-	public AuthenticationSuccessHandler authenticationSuccessHandler(){
-		return new CustomAuthenticationSuccess();
-		
-	}
 	
 	@Bean
 	public ContextLoaderListener contextLoaderListener(){
