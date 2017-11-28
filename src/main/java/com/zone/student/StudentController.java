@@ -1,4 +1,4 @@
-package com.zone.enter;
+package com.zone.student;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class PageController {
+public class StudentController {
 		
 		@Autowired
-		private PageDao pageDao;
+		private StudentDao pageDao;
 	
 		@RequestMapping( value = "/enter", method = RequestMethod.GET)
 			public ModelAndView enter(HttpServletRequest request){
@@ -27,7 +27,7 @@ public class PageController {
 		}
 		
 		@RequestMapping(value = "/student_creation", method=RequestMethod.POST)
-		public ModelAndView studentCreation(@RequestBody PageModel page, HttpServletRequest request){
+		public ModelAndView studentCreation(@RequestBody StudentModel page, HttpServletRequest request){
 			DateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
 			Date date = new Date();
 			ModelAndView model = new ModelAndView();

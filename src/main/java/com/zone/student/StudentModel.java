@@ -1,4 +1,4 @@
-package com.zone.enter;
+package com.zone.student;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,7 +16,7 @@ import com.zone.signup.SignupModel;
 @Entity
 @Table( name = "z_page")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PageModel {
+public class StudentModel {
 	
 	private int stu_id;
 	private String name;
@@ -30,7 +30,7 @@ public class PageModel {
 	private String obsolete;
 	private String active;
 	
-	public PageModel() {
+	public StudentModel() {
 		
 	}
 

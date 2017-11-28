@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.zone.common.UserInformation;
+
 import com.zone.signup.SignupDao;
 import com.zone.signup.SignupModel;
 import com.zone.user.UserDao;
