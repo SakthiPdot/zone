@@ -1,39 +1,32 @@
 zoneApp.factory('LoginService',['$http','$q', function ($http,$q){
 		
 		var factory = {
-				getUsername : getUsername	
+				getLogin : getLogin	
 		};
 		
 		return factory;
 		
-		function getUsername(login){
+		function getLogin(login){
 			
 			var deferred = $q.defer();
 			
 			$http({
 				
 						method : 'POST',
-						url : 'logins',
+						url : 'login',
 						data : login
 			})
 			
 			.then(
 						function (response){
-							console.log("u "+!response.success);
-							deferred.resolve(!response.success);
-							/*if(!response.success){
-								console.log("ff");								
-								deferred.resolve(!response.success);
-							}else{
-								console.log("HHH");
-							}*/
-							
-							
+							console.log("users",response.data);
+							console.log("users",response.data.username);
+							deferred.resolve(response.data.result);
+														
 						}, function(errResponse) {
-							console.log(errResponse);
+							console.log(errResponse.data);
 						}
-			      );
-			
+			      );		
 			
 			return deferred.promise;
 		}

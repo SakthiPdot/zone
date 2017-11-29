@@ -18,8 +18,8 @@ zoneApp.factory('ConfirmDialogService', ['$http', '$q', function ($http, $q){
 				type: type, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
 				closable: false, 
 				draggable: false, 
-				btnCancelLabel: 'No!', // <-- Default value is 'Cancel',
-				btnOKLabel: 'Yes!', // <-- Default value is 'OK',
+				btnCancelLabel: 'No', // <-- Default value is 'Cancel',
+				btnOKLabel: 'Yes', // <-- Default value is 'OK',
 				btnOKClass: btnclass, // <-- If you didn't specify it, dialog type will be used,
 				
 				callback: function(x) {

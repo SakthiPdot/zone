@@ -11,6 +11,7 @@ public class UserModel {
 
 		private int client_id;
 		private int user_id;
+		private String name;
 		private String username;
 		private String password;
 		private String email;
@@ -43,6 +44,16 @@ public class UserModel {
 
 		public void setUser_id(int user_id) {
 			this.user_id = user_id;
+		}
+
+		
+		@Column(name = "name")
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
 		}
 
 		@Column(name = "username")

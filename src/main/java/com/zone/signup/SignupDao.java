@@ -9,6 +9,7 @@ public interface SignupDao {
 	public String checkUsername(String username);
 	public String getlogin(String username, String password);
 	public SignupModel getSignupId(int id);
+
 	
 	// ======== find by username =========//
 	

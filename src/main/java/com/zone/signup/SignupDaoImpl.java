@@ -28,11 +28,11 @@ public class SignupDaoImpl implements SignupDao{
 		String hql = "from SignupModel where username='"+username+"' AND password = '"+password+"' AND obsolete = 'N' AND active = 'Y'";
 		Query query = sessionFactory.getCurrentSession()
 				.createQuery(hql);		
-		if(query.uniqueResult() != null) {
-			return query.uniqueResult().toString();
-		} else{
-			return null;
+		if(query.uniqueResult() != null) {			
+			return "vvv";
 		}
+			return null;
+		
 	
 	}
 
@@ -96,6 +96,8 @@ public class SignupDaoImpl implements SignupDao{
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return ((Number) query.uniqueResult()).intValue();
 	}
+
+	
 
 
 }

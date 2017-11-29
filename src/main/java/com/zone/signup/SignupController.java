@@ -40,10 +40,10 @@ public class SignupController {
 			
 		}
 		
-		@RequestMapping(value = "/signup", method=RequestMethod.GET)
+		@RequestMapping(value = "/sign_up", method=RequestMethod.GET)
 		public ModelAndView signup(HttpServletRequest request){
 			ModelAndView model = new ModelAndView();
-			model.setViewName("zone_signup");
+			model.setViewName("signup/signup");
 			return model;
 		}
 		
@@ -68,6 +68,7 @@ public class SignupController {
 			UserModel users = new UserModel();
 			
 			users.setClient_id(clientid);
+			users.setName(signup.getName());
 			users.setUsername(signup.getUsername());
 			users.setPassword(signup.getPassword());
 			users.setEmail(signup.getEmail());
@@ -79,11 +80,9 @@ public class SignupController {
 			users.setObsolete(signup.getObsolete());
 			users.setActive(signup.getActive());
 			
-			userDao.saveOrUpdate(users);
+			userDao.saveOrUpdate(users);	
 			
-			
-			
-			model.setViewName("zone_signup");
+			model.setViewName("zone_dashboard");
 			return model;			
 		}
 		
@@ -120,15 +119,15 @@ public class SignupController {
 			
 		}*/
 		
-		@RequestMapping(value = "/logins", method = RequestMethod.POST)
-		public ResponseEntity<String> getUser(HttpServletRequest request, @RequestBody String login) throws JSONException {
-			JSONObject json = new JSONObject(login);	
-			String username = json.getString("username");
-			String password = json.getString("password");
-			/*String logins = signupDao.getlogin(json.getString("username").toString(),json.getString("password").toString());*/
-			String logins = signupDao.getlogin(username, password);
-			System.err.println("OOOO"+username);
-			return new ResponseEntity<String>(login,HttpStatus.OK);
+		@RequestMapping(value = "/login", method = RequestMethod.POST)
+		public ResponseEntity<String> getLogin(HttpServletRequest request, @RequestBody String login) throws JSONException{	
+			JSONObject json = new JSONObject(login);
+			String username = json.getString("username").toString();
+			String password = json.getString("password").toString();
+			String logins = userDao.login(username, password);
+			json.put("result", logins);
+			System.err.println("Error " + logins + password + username +  json.toString());
+			return new ResponseEntity<String> (json.toString(),HttpStatus.OK);
 			
 		}
 		

@@ -36,13 +36,9 @@ public class DashboardController {
 		
 		ModelAndView model = new ModelAndView();	
 		HttpSession session = request.getSession();
-		String username = request.getUserPrincipal().getName();
-		/*UserModel user = request.getSession().setAttribute("user username);
-*/		String x="kl";
-		session.setAttribute("lll", x + username);
-		System.out.println("@@@"+x);
-		model.setViewName("zone_dashboard");
-		return model;
 		
+		model.setViewName("zone_dashboard");
+		return model;		
 	}
+	
 }

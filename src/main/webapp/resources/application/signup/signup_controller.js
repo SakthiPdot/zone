@@ -26,30 +26,38 @@ zoneApp.controller('SignupController',['$scope','SignupService','ConfirmDialogSe
 				.then(
 							function () {
 																
-								window.location.replace("signup");
+								
 								console.log("success");
+								alert("signup success");
+								window.location.replace("dashboard");
 							},
 							function(errResponse) {
 								console.log("failure");
+								alert("signup error");
 							}
 				      );
 		}
 		
 		function submit() {
 			if(self.signup.client_id == null ) {
-				self.confirm_title = 'Save';
+				
+				console.log(self.signup);
+				createSignup(self.signup);
+				
+				/*self.confirm_title = 'Save';
 				self.confirm_type = BootstrapDialog.TYPE_SUCCESS;
 				self.confirm_msg = self.confirm_title + ' ' + self.signup.username + 'created?';
-				self.confirm_btnclass = 'btn-success';
-				
+				self.confirm_btnclass = 'btn-success';				
 				ConfirmDialogService.confirmBox(self.confirm_title,self.confirm_type,self.confirm_msg,self.confirm_btnclass)
-						.then(
+						
+				.then(
 									function (res) {
+										console.log("Save");
 										console.log(self.signup);
 										createSignup(self.signup);
 										
 									}
-						     );
+						     );*/
 			} else {
 				
 				self.confirm_title = 'Update';

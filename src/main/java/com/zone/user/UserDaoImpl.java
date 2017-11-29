@@ -26,17 +26,17 @@ public class UserDaoImpl implements UserDao{
 		//======== Login Process =============//
 		@Override
 		@Transactional
-		public boolean login(String username, String password) {
-			String hql = "from UserModel where username='"+username+"' AND password ='"+password+"'";
+		public String login(String username, String password) {
+			String hql = "from UserModel where username='"+username+"' AND password ='"+password+"' AND obsolete='N' AND active = 'Y' ";
 			Query query = sessionFactory.getCurrentSession()
-					.createQuery(hql);
+					.createQuery(hql);	
+			@SuppressWarnings("unchecked")
+			List<UserModel> login = (List<UserModel>) query.list();
 			
-			if(query.uniqueResult() != null) {
-				return true;
-			} else {
-				return false;
+			if(login != null && !login.isEmpty()) {
+				return login.toString();
 			}
-			
+				return "null";
 		}
 
 		
@@ -52,7 +52,7 @@ public class UserDaoImpl implements UserDao{
 			{
 				return user.get(0);
 			} else {
-				System.err.println("KKKKKKKKKK"+user);
+				
 				return null;
 			}
 			
