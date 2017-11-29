@@ -19,10 +19,10 @@ public class StudentController {
 		@Autowired
 		private StudentDao pageDao;
 	
-		@RequestMapping( value = "/enter", method = RequestMethod.GET)
+		@RequestMapping( value = "/student", method = RequestMethod.GET)
 			public ModelAndView enter(HttpServletRequest request){
 			ModelAndView model = new ModelAndView();
-			model.setViewName("enter/1");
+			model.setViewName("student/student");
 			return model;				
 		}
 		
@@ -36,7 +36,7 @@ public class StudentController {
 			page.setActive("Y");
 			page.setObsolete("N");			
 			pageDao.saveOrUpdate(page);
-			model.setViewName("enter/1");
+			model.setViewName("student/student");
 			return model;			
 		}
 }

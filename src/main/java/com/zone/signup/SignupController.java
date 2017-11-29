@@ -126,7 +126,6 @@ public class SignupController {
 			String password = json.getString("password").toString();
 			String logins = userDao.login(username, password);
 			json.put("result", logins);
-			System.err.println("Error " + logins + password + username +  json.toString());
 			return new ResponseEntity<String> (json.toString(),HttpStatus.OK);
 			
 		}

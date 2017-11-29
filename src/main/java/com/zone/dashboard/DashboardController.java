@@ -34,9 +34,7 @@ public class DashboardController {
 	@RequestMapping(value = "/dashboard", method=RequestMethod.GET)
 	public ModelAndView dashboard(HttpServletRequest request){
 		
-		ModelAndView model = new ModelAndView();	
-		HttpSession session = request.getSession();
-		
+		ModelAndView model = new ModelAndView();
 		model.setViewName("zone_dashboard");
 		return model;		
 	}
