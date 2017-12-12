@@ -20,9 +20,19 @@
 </head>
 <body>
 
-	<h2>Dashboard</h2>Hi ${username}
+	<h2>Dashboard</h2>Hi ${names}
+	<br>
+	Username ${username}
 	
-	<a href="student"> Application</a>
+	<br>
+	client ID ${clientid }
+	<br>
+	User ID ${userid}
+	<br>
+
+	
+	<a href="student"> Application</a><br>
+	<a href="user">User</a>
 
   <script src="resources/angular/js/jquery-1.11.1.min.js"></script>
   <script src="resources/common/js/popper.min.js"></script>

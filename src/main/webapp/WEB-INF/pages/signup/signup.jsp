@@ -31,8 +31,14 @@
 	    -webkit-appearance: none;
 	    margin : 0;
 	 }
+	 
+	 .errorMsg 
+	 {
+	 	color : red;
+	 }
 	
 </style>
+
 
 </head>
 
@@ -54,11 +60,12 @@
 						</div>
 						<div class="form-group">
 							<label>Username</label>
-							<input type="text" class="form-control charnumeric" data-ng-model="ctrl.signup.username"  maxlength="10" required>
+							<input type="text" class="form-control charnumeric" data-ng-blur="ctrl.checkUsername(ctrl.signup.username)" data-ng-model="ctrl.signup.username"  maxlength="10" required>
+							<span class="errorMsg" data-ng-show="nameWrong">This Username Already Choose Someone..!</span>
 						</div>
 						<div class="form-group">
 							<label>Password</label>
-							<input type="password" class="form-control" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"  id="password" data-ng-model="ctrl.signup.password" required>
+							<input type="password" class="form-control"  id="password" data-ng-model="ctrl.signup.password" required>
 						</div>
 						<div class="form-group">
 							<label>Confirm Password</label>

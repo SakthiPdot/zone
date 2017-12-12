@@ -33,7 +33,14 @@ public class DashboardController {
 	
 	@RequestMapping(value = "/dashboard", method=RequestMethod.GET)
 	public ModelAndView dashboard(HttpServletRequest request){
-		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("names");
+		UserModel user = userDao.findbyuserName(username);
+		int userclientid = user.getClient_id();
+		int userid = user.getUser_id();
+		session.setAttribute("username", username);
+		session.setAttribute("clientid", userclientid);
+		session.setAttribute("userid", userid);
 		ModelAndView model = new ModelAndView();
 		model.setViewName("zone_dashboard");
 		return model;		

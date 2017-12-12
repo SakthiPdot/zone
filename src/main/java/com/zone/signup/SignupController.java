@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,18 +51,20 @@ public class SignupController {
 		
 		
 		@RequestMapping(value = "/signup_creation", method=RequestMethod.POST)
-		public ModelAndView createlogin(@RequestBody SignupModel signup, HttpServletRequest request) {
+		public ResponseEntity<UserModel> createlogin(@RequestBody SignupModel signup, HttpServletRequest request) {
 			
 			
 			
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-			Date date = new Date();
-			ModelAndView model = new ModelAndView();			
+			Date date = new Date();				
 			
 			signup.setCreated_date(dateFormat.format(date).toString());
 			signup.setObsolete("N");
 			signup.setActive("Y");
 			signupDao.saveOrUpdate(signup);
+			
+			HttpSession session = request.getSession();				
+			session.setAttribute("names", signup.getUsername());
 			
 			int clientid = signupDao.maxid();
 			
@@ -80,10 +83,11 @@ public class SignupController {
 			users.setObsolete(signup.getObsolete());
 			users.setActive(signup.getActive());
 			
-			userDao.saveOrUpdate(users);	
+			userDao.saveOrUpdate(users);
 			
-			model.setViewName("zone_dashboard");
-			return model;			
+			System.out.println("========>"+users);
+			
+			return new ResponseEntity<UserModel>(users,HttpStatus.OK);			
 		}
 		
 		
@@ -126,6 +130,8 @@ public class SignupController {
 			String password = json.getString("password").toString();
 			String logins = userDao.login(username, password);
 			json.put("result", logins);
+			HttpSession session = request.getSession();
+			session.setAttribute("names", username);
 			return new ResponseEntity<String> (json.toString(),HttpStatus.OK);
 			
 		}

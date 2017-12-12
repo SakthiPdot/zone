@@ -3,7 +3,7 @@
 zoneApp.controller('SignupController',['$scope','SignupService','ConfirmDialogService',function($scope,SignupService,ConfirmDialogService){
 		
 		$scope.nameWrong = false;
-		$scope.regEx="/^[0-9]{10,10}$/";
+	
 			
 			
 		var self = this;
@@ -24,11 +24,10 @@ zoneApp.controller('SignupController',['$scope','SignupService','ConfirmDialogSe
 		function createSignup(signup) {
 			SignupService.createSignup(signup)
 				.then(
-							function () {
+							function (response) {
 																
 								
-								console.log("success");
-								alert("signup success");
+								console.log(response);								
 								window.location.replace("dashboard");
 							},
 							function(errResponse) {

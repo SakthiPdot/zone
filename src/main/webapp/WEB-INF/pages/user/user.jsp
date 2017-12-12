@@ -14,7 +14,14 @@
 	<body data-ng-app="zoneApp" data-ng-controller="UserController as userctrl">
 			
 			<form data-ng-submit="userctrl.submit()" name = "userForm">
-				<input type="text" data-ng-model="userctrl.user.user_id">
+				Username ${username}
+	
+	<br>
+	client ID ${clientid }
+	<br>
+	User ID ${userid}
+				
+				<input type="hidden" data-ng-model="userctrl.user.user_id">
 				Name<input type="text" data-ng-model="userctrl.user.name">
 				<br>
 				Username<input type="text" data-ng-model="userctrl.user.username">
