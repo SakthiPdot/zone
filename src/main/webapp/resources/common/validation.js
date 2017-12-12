@@ -3,166 +3,46 @@ $(document).ready(function() {
 
 	 $(".disabled").css("tabindex", "-1");
 	
-	$(document).bind('keydown', function(e) {
 		
-		
-		
-		
-	if(e.ctrlKey && (e.which == 83)) {
-		    e.preventDefault();
-		    return false;
-		  }
-	
-	if(e.ctrlKey && (e.which == 119)) {
-		 var check=confirm("Press a button!");
-		 if(check){
-		    e.preventDefault();	
-		    return false;
-		 }
-	  }
+	$('.char').keyup(function() {
+		console.log("f");
+	    this.value = this.value.replace(/[^a-zA-Z]/,'');
 	});
 	
+	$('.charspace').keyup(function(){
+		this.value = this.value.replace(/[^a-zA-Z\-\s]/,'');
+	});
 	
-
-	/*// Disable cut copy paste	
-	$('body').bind('cut copy paste drop', function(e) {
-		e.preventDefault();
+	$('.charnumeric').keyup(function(){
+		this.value = this.value.replace(/[^a-zA-Z0-9]/,'');
+	});
+	
+	$('.charnumspace').keyup(function(){
+		this.value = this.value.replace(/[^a-zA-Z0-9\-\s]/,'');
+	});
+	
+	$('.numeric').keyup(function(){
+		this.value = this.value.replace(/[^0-9]/,'');
+	})
+	
+	var parseInput = function(val) {
+    var floatValue = parseFloat(val);
+    return isNaN(floatValue) ? '' : floatValue;
+	}
+	
+	$('.float').keyup(function(){
+	    var value = $(this).val()+'';
+	    if (value[value.length-1] !== '.') {
+	        $(this).val(parseInput(value));
+	    }
+	}).focusout(function(){
+	    $(this).val(parseInput($(this).val()+''));
+	});
+	
+	$('.numberhyphen').keyup(function(){
+		this.value = this.value.replace(/[^0-9\-]/, '');
 	});
 
-	// Disable mouse click
-	$('body').on("contextmenu", function() {
-		return false;
-	})*/
 
 });
-  function isNumberKey(evt)
-  {
-     var charCode = (evt.which) ? evt.which : event.keyCode
-     if (charCode > 31 && (charCode < 48 || charCode > 57))
-        return false;
-
-     return true;
-  }
   
-  
-  //ONLY ACCEPTS NUMERIC VALUE AND CHARSET LESS THAN 31
-  function CheckIsNumeric(objEvt) {
-      var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-      if (charCode > 31 && (charCode < 48 || charCode > 57)) {       
-         
-    	  return false;
-      }
-      else {   
-    	
-    		  return true;  
-      }
-  }
-  
-  
-  //ONLY ACCEPTS NUMERIC VALUE AND CHARSET LESS THAN 31 AND DOT
-  function CheckIsNumericAnddot(objEvt,str) {
-      var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-      if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {       
-          return false;
-      }
-      else {   
-    	  
-     	  if (str && charCode == 46) {
-      		 if(str.includes(".")){
-      			 return false;	
-      		 }else{
-      			 return true; 
-      		 }
-      	  } else if(charCode == 46){ 
-      			  return false; 
-      	  }else {        
-      	          return true;
-            }
-      }
-  }
-
-  //ONLY ACCEPTS NUMERIC VALUE AND CHARSET LESS THAN 31 AND -
-  function CheckIsNumericAndHyphen(objEvt) {
-      var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-      if (charCode != 45 && charCode > 31 && (charCode < 48 || charCode > 57)) {       
-          return false;
-      }
-      else {       
-          return true;
-      }
-  }
-  
-
-  //ONLY ACCEPTS CHARACTER VALUE AND CHARSET LESS THAN 31 AND DOT
-  function CheckIsCharacterWithspace(objEvt,str) {
-	  
-      var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-      if ((charCode < 33) || (charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122)) {      
-
-    	  if (str && charCode == 32) {
-    		 if(str.endsWith(" ")){
-    			 return false;	
-    		 }else{
-    			 return true; 
-    		 }
-    	  } else if(charCode == 32){ 
-    			  return false; 
-    	  }else {        
-    	          return true;
-          }
-       }else{
-              return false;
-      	}
-  }
-  
-
-  //CHECKS BOTH ALPHABET AND NUMERIC
-  function CheckIsAlphaNumericWithspace(objEvt,str) {
-      var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-  	if  ((charCode > 47 && charCode < 58) || 
-  			(charCode < 33) || (charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122)){  // a-z
-  		
-  		
-  		if (str && charCode == 32) {
-    		 if(str.endsWith(" ")){
-    			 return false;	
-    		 }else{
-    			 return true; 
-    		 }
-    	  } else if(charCode == 32){ 
-    			  return false; 
-    	  }else {        
-    	          return true;
-          }
-  		
-  		
-  	}else{
-          return false;
-  	}	
-
-  }
-  
-
-  //ONLY ACCEPTS CHARACTER VALUE AND CHARSET LESS THAN 31 AND DOT
-  function CheckIsCharacter(objEvt) {
-
-      var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-      if ((charCode < 32) || (charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122)) {      
-      
-    	          return true;
-         
-       }else{
-              return false;
-      	}
-  }
-  //CHECKS BOTH ALPHABET AND NUMERIC
-  function CheckIsAlphaNumeric(objEvt) {
-      var charCode = (objEvt.which) ? objEvt.which : event.keyCode
-  	if  ((charCode > 47 && charCode < 58) || 
-  			(charCode < 32) || (charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122)){  // a-z
-  			 return true; 
-  	}else{
-          return false;
-  	}	
-
-  }

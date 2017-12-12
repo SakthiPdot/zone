@@ -38,11 +38,11 @@
         <form data-ng-submit = "ctrl.submit()" name = "loginForm">
           <div class="form-group">
             <label>Username</label>
-            <input class="form-control"  type="text" data-ng-model = "ctrl.login.username" name="username" placeholder="Username">
+            <input class="form-control"  type="text" name="username" onkeyup="this.value = this.value.replace(/[^a-zA-Z]/,'')" maxlength="10" required data-ng-model = "ctrl.login.username"  placeholder="Username">
           </div>
           <div class="form-group">
             <label >Password</label>
-            <input class="form-control"  type="password" data-ng-model = "ctrl.login.password" name="password" placeholder="Password">
+            <input class="form-control"  type="password" name="password" data-ng-model = "ctrl.login.password"  placeholder="Password">
           </div>
           <!-- <div class="form-group">
             <div class="form-check">
@@ -58,7 +58,8 @@
   
 	<!-- </form> -->
 	<a href="dashboard">Dashboard</a>
-	<a href="user">User</a>
+	<a href="z_user">User</a>
+	
 	
 	        <script src="resources/angular/js/jquery-1.11.1.min.js"></script>
 			<script src="resources/common/js/popper.min.js"></script>

@@ -20,7 +20,7 @@
 </head>
 <body>
 
-	<h2>Dashboard</h2> ${username}
+	<h2>Dashboard</h2>Hi ${username}
 	
 	<a href="student"> Application</a>
 

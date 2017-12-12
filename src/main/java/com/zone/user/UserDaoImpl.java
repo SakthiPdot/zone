@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserDaoImpl implements UserDao{
 	
 		@Autowired
-		SessionFactory sessionFactory;
+		private SessionFactory sessionFactory;
 
 		//======== User Save Function =========//
 		@Override
@@ -52,7 +52,7 @@ public class UserDaoImpl implements UserDao{
 			{
 				return user.get(0);
 			} else {
-				
+				System.out.println("kkk");
 				return null;
 			}
 			

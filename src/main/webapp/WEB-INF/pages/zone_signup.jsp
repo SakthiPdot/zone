@@ -85,7 +85,7 @@
 			<label>Number with (-)</label>
 			<input type="number" onkeypress = "return CheckIsNumericAndHyphen(event)" required>
 			<br>
-			<label>Character and Letter</label>
+			<label>Character and Number</label>
 			<input type="text"    onkeyup = "this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" required>
 			<br>
 			<label>Character</label>
