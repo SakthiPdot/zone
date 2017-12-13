@@ -3,12 +3,12 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 	
 		
 		var self = this;
-		
+		self.userall = [];
 		self.user ={};
 		self.submit = submit;
 		self.save = "saveclose";
 		
-		
+		fetchAllUser();
 		$scope.save = function(event) {
 			console.log("save button");
 			self.save = event.target.id;
@@ -44,6 +44,20 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 			} else {
 				console.log("else");
 			}
+		}
+		
+		//==== Get Register Process ======//
+		function fetchAllUser(){
+			UserService.fetchAllUser()
+				.then(
+						function(user) {
+							self.userall = user;
+							console.log(user);
+						},
+						function(errResponse) {
+							console.log("Err")
+						}
+				      );
 		}
 	
 }]);

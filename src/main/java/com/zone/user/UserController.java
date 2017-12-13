@@ -3,6 +3,7 @@ package com.zone.user;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -53,5 +54,22 @@ public class UserController {
 		return model;
 		
 	}
+	
+	@RequestMapping(value = "/userreg/", method = RequestMethod.GET)
+	public List<UserModel> fetchUserReg(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("names");
+		UserModel uname = userDao.findbyuserName(username);
+		int userclientid = uname.getClient_id();
+		int userid = uname.getUser_id();
+		session.setAttribute("username", username);
+		session.setAttribute("clientid", userclientid);
+		session.setAttribute("userid", userid);		
+		System.out.println(userclientid);
+		List<UserModel> getUser = userDao.getUserRegister(userclientid);
+		return getUser;
+		
+	}
+	
 
 }

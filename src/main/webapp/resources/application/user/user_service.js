@@ -2,7 +2,8 @@ zoneApp.factory('UserService',['$http','$q', function($http,$q){
 			
 		var factory = {
 				
-				createUser : createUser
+				createUser : createUser,
+				fetchAllUser : fetchAllUser
 		};
 		
 		return factory;
@@ -25,6 +26,22 @@ zoneApp.factory('UserService',['$http','$q', function($http,$q){
 						console.log("rr"+errResponse);
 					}
 			     );
+			return deferred.promise;
+		}
+		
+		//====== Get Register Process ======//
+		
+		function fetchAllUser(){
+			var deferred = $q.defer();
+			$http.get('userreg/')
+				.then(
+						function(response){
+							deferred.resolve(response.data);
+							console.log(response.data);
+						}, function(errResponse) {
+							console.log("s error");
+						}
+				     );
 			return deferred.promise;
 		}
 	

@@ -13,13 +13,21 @@
 	
 	<body data-ng-app="zoneApp" data-ng-controller="UserController as userctrl">
 			
+			<table>
+				<thead>
+					<tr>
+						<th>Username</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr data-ng-repeat = "user in userctrl.userall">
+						<td>{{user.username}}</td>
+					</tr>
+			    </tbody>
+			</table>
+			
 			<form data-ng-submit="userctrl.submit()" name = "userForm">
-				Username ${username}
-	
-	<br>
-	client ID ${clientid }
-	<br>
-	User ID ${userid}
 				
 				<input type="hidden" data-ng-model="userctrl.user.user_id">
 				Name<input type="text" data-ng-model="userctrl.user.name">
@@ -34,6 +42,11 @@
 				<br>
 				<button data-ng-click="save($event)" type="submit">Save</button>
 			</form>
+			<br>
+			
+			
+					
+			
 			
 			<script type="text/javascript" src="resources/angular/js/jquery-1.11.1.min.js"></script>
 			<script type="text/javascript" src="resources/common/bootstrap.min.js"></script>

@@ -57,4 +57,17 @@ public class UserDaoImpl implements UserDao{
 			}
 			
 		}
+		//====Get Register Process ======//
+		@Override
+		@Transactional
+		public List<UserModel> getUserRegister(int clientid) {
+			String hql = "from UserModel where client_id="+clientid+" and obsolete='N' and active='Y'";
+			@SuppressWarnings("unchecked")
+			List<UserModel> listUser =(List<UserModel>) sessionFactory.getCurrentSession()
+					.createQuery(hql).list();
+			if(listUser != null && !listUser.isEmpty()) {
+				return listUser;
+			}
+			return null;
+		}
 }
