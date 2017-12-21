@@ -3,10 +3,27 @@ zoneApp.factory('UserService',['$http','$q', function($http,$q){
 		var factory = {
 				
 				createUser : createUser,
-				fetchAllUser : fetchAllUser
+				fetchAllUser : fetchAllUser,
+				fetchAllUserRoles : fetchAllUserRoles
 		};
 		
 		return factory;
+		
+		function fetchAllUserRoles() {
+			var deferred = $q.defer();
+			$http.get('role/')
+			 .then(
+					 function(response) {
+						 deferred.resolve(response.data);
+						 console.log('hhh');
+					 },
+					 function(errResponse) {
+						 console.log('sss');
+					 }
+				  );
+			return deferred.promise;
+			 
+		}
 		
 		function createUser(user) {
 			var deferred = $q.defer();

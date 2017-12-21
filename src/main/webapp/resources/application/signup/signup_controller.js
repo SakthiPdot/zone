@@ -15,7 +15,22 @@ zoneApp.controller('SignupController',['$scope','SignupService','ConfirmDialogSe
 		self.updateSignup = updateSignup;
 		self.deleteSignup = deleteSignup;
 		
+		
 		fetchAllSignup();
+		fetchAllRoles();
+		
+		function fetchAllRoles() {
+			SignupService.fetchAllRoles()
+				.then(
+						function(roles) {
+							self.roles = roles;
+							console.log('ri');
+						}, function(errResponse) {
+							console.log("error");
+						}
+				      );
+		}
+		
 		$scope.save = function(event) {
 			console.log("save button");
 			self.save = event.target.id;			
@@ -39,7 +54,9 @@ zoneApp.controller('SignupController',['$scope','SignupService','ConfirmDialogSe
 		
 		function submit() {
 			if(self.signup.client_id == null ) {
-				
+				//self.signup.role.role_id = self.signup.role_id;
+				/*delete self.signup.role_id;*/
+				//console.log(self.signup.role.role_id)
 				console.log(self.signup);
 				createSignup(self.signup);
 				
@@ -66,6 +83,8 @@ zoneApp.controller('SignupController',['$scope','SignupService','ConfirmDialogSe
 				ConfirmDialogService.confirmBox(self.confirm_title,self.confirm_type,self.confirm_msg,self.confirm_btnclass)
 					.then(
 							function(response){
+								self.signup.role.role_id = self.signup.role_id;
+								delete self.signup.role_id;
 								editSignup(self.signup);
 								console.log("submit success======>"+self.signup);
 							}, function(errResponse){

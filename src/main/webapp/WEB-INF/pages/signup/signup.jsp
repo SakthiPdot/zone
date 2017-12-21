@@ -51,6 +51,13 @@
 					<form data-ng-submit = "ctrl.submit()" name="signupForm">
 						<input type="hidden" data-ng-model="ctrl.signup.client_id"/>
 						<div class="form-group">
+							<label>Select</label>
+							<select class="form-control" data-ng-options="role.role_id as role.role_name for role in ctrl.roles"
+							data-ng-model = "ctrl.signup.role_id">
+								<option value="">-- Select --</option>
+							</select>
+						</div>
+						<div class="form-group">
 							<label>First Name</label>
 							<input type="text" class="form-control char" data-ng-model="ctrl.signup.name"  maxlength="6"  required>
 						</div>

@@ -8,5 +8,6 @@ public interface UserDao {
 	public String login(String username, String password);
 	public UserModel findbyuserName(String username);
 	public List<UserModel> getUserRegister(int clientid);
+	public String checkUserName(String username);
 	
 }

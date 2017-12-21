@@ -42,6 +42,7 @@ public class SignupDaoImpl implements SignupDao{
 		@SuppressWarnings("unchecked")
 		List <SignupModel> getreg = (List<SignupModel>) sessionFactory.getCurrentSession()
 				.createQuery("from SignupModel where obsolete = 'N' and active = 'Y' ").list();
+		
 		return getreg;
 	}
 
@@ -72,6 +73,7 @@ public class SignupDaoImpl implements SignupDao{
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public SignupModel findByUsername(String username) {

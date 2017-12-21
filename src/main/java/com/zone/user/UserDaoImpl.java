@@ -70,4 +70,17 @@ public class UserDaoImpl implements UserDao{
 			}
 			return null;
 		}
+		
+		//===== Check Username Process ==========//
+		@Override
+		@Transactional
+		public String checkUserName(String username) {
+			@SuppressWarnings("unchecked")
+			List<UserModel> getUserName = sessionFactory.getCurrentSession()
+					.createQuery("from UserModel where obsolete = 'N' and active = 'Y'AND username IN('" + username.toUpperCase()+"','" + username.toLowerCase()+"')").list();
+			if(!getUserName.isEmpty() && getUserName != null) {
+				return "AVAILABLE";
+			}
+			    return "NOTAVAILABLE";
+		}
 }

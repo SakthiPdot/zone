@@ -13,16 +13,24 @@
 	
 	<body data-ng-app="zoneApp" data-ng-controller="UserController as userctrl">
 			
-			<table>
+			<table border="1" style="width:100%;"> 
 				<thead>
 					<tr>
-						<th>Username</th>
+						<th>S.No</th>
+						<th data-ng-click="orderTable('name')">Name</th>
+						<th data-ng-click="orderTable('username')">Username</th>
+						<th>Email</th>
+						<th>Mobile No</th>
 					</tr>
 				</thead>
 				
 				<tbody>
-					<tr data-ng-repeat = "user in userctrl.userall">
+					<tr data-ng-repeat = "user in userctrl.userall | orderBy:Table">
+						<td>{{$index+1}}</td>
+					    <td>{{user.name}}</td>
 						<td>{{user.username}}</td>
+						<td>{{user.email}}</td>
+						<td>{{user.mobileno}}</td>
 					</tr>
 			    </tbody>
 			</table>
@@ -36,6 +44,10 @@
 				<br>
 				Password<input type="text" data-ng-model="userctrl.user.password">
 				<br>
+				 Role<select data-ng-options="role.role_id as role.role_name for role in userctrl.roles" data-ng-model="userctrl.user.role_id">
+							<option value="">-- Select --</option>
+					</select>
+				<br> 
 				Email <input type="text" data-ng-model="userctrl.user.email">
 				<br>
 				Mobile No <input type="text" data-ng-model="userctrl.user.mobileno">

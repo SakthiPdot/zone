@@ -7,10 +7,28 @@ zoneApp.factory('SignupService',['$http','$q', function ($http,$q){
 					updateSignup : updateSignup,
 					deleteSignup :  deleteSignup,
 					fetchAllSignup : fetchAllSignup,
-					checkUsername : checkUsername
+					checkUsername : checkUsername,
+					fetchAllRoles : fetchAllRoles
+					
 			};
 			
 			return factory;
+			
+			function fetchAllRoles() {
+				var deferred = $q.defer();
+				$http.get('roles/')
+					.then(
+							function(response) {
+								console.log(response.data);
+								deferred.resolve(response.data);
+							}, 
+							function(errResponse) {
+								console.log(errResponse);
+								console.log('f');
+							}
+						  );
+				return deferred.promise;					
+			}
 			
 			function createSignup(signup) {
 				var deferred = $q.defer();
@@ -32,6 +50,7 @@ zoneApp.factory('SignupService',['$http','$q', function ($http,$q){
 								console.log("service right");
 							}, function (errResponse) {
 								deferred.reject(errResponse);
+								console.log(errResponse);
 								console.log("service wrong");
 							}
 				       );

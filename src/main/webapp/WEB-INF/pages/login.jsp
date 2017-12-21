@@ -52,10 +52,12 @@
           </div> -->
           <button class="btn btn-primary btn-block" data-ng-click = "save($event)" type="submit">Login</button>
         </form>
+        
         </div>
     </div>
   </div>
-  
+ 
+ 
 	<!-- </form> -->
 		
 	

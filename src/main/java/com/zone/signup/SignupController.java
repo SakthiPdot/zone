@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zone.role.RoleDao;
+import com.zone.role.RoleModel;
 import com.zone.user.UserDao;
 import com.zone.user.UserModel;
 
@@ -32,6 +34,21 @@ public class SignupController {
 		
 		@Autowired
 		UserDao userDao;
+		
+		@Autowired
+		RoleDao roleDao;
+		
+		
+		
+		@RequestMapping(value = "/roles/", method = RequestMethod.GET)
+		public ResponseEntity<List<RoleModel>> fetchRoles(HttpServletRequest request) {
+			
+			List<RoleModel> roleList = roleDao.list();
+			
+			System.out.println("SSSSS"+roleList);
+			return new ResponseEntity<List<RoleModel>>(roleList, HttpStatus.OK);
+			
+		}
 		
 		@RequestMapping(value = "/", method=RequestMethod.GET)
 		public ModelAndView login(HttpServletRequest request) {
@@ -57,11 +74,13 @@ public class SignupController {
 			
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			Date date = new Date();				
-			
+			System.out.println("");
 			signup.setCreated_date(dateFormat.format(date).toString());
 			signup.setObsolete("N");
 			signup.setActive("Y");
 			signupDao.saveOrUpdate(signup);
+			
+			System.out.println(""+signup);
 			
 			HttpSession session = request.getSession();				
 			session.setAttribute("names", signup.getUsername());
@@ -72,6 +91,7 @@ public class SignupController {
 			
 			users.setClient_id(clientid);
 			users.setName(signup.getName());
+			users.setRole_id(signup.getRole_id());
 			users.setUsername(signup.getUsername());
 			users.setPassword(signup.getPassword());
 			users.setEmail(signup.getEmail());
@@ -85,7 +105,7 @@ public class SignupController {
 			
 			userDao.saveOrUpdate(users);
 			
-			System.out.println("========>"+users);
+			System.out.println(""+users);
 			
 			return new ResponseEntity<UserModel>(users,HttpStatus.OK);			
 		}
@@ -138,7 +158,7 @@ public class SignupController {
 		
 		@RequestMapping( value = "checkUsername", method = RequestMethod.POST)
 		public ResponseEntity<Void> checkUsername(@RequestBody String username, HttpServletRequest request) {
-			String name = signupDao.checkUsername(username.trim());
+			String name = userDao.checkUserName(username.trim());
 			
 			if(name == "AVAILABLE") {
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
@@ -186,7 +206,7 @@ public class SignupController {
 			SignupModel signup = signupDao.getSignupId(id);
 			
 			if(signup == null) {
-				System.out.println("id is null =================>");
+				System.out.println("id is null =========");
 				return new ResponseEntity<SignupModel> (HttpStatus.NOT_FOUND);
 			} else {
 				Date date = new Date();

@@ -21,6 +21,7 @@ public class SignupModel {
 	private String created_date;
 	private String obsolete;
 	private String active;
+	private int role_id;
 	
 	public SignupModel() {
 		
@@ -33,6 +34,15 @@ public class SignupModel {
 	}
 	public void setClient_id(int client_id) {
 		this.client_id = client_id;
+	}
+	
+	@Column(name = "role_id")
+	public int getRole_id() {
+		return role_id;
+	}
+
+	public void setRole_id(int role_id) {
+		this.role_id = role_id;
 	}
 	
 	@Column(name = "name")
@@ -127,6 +137,8 @@ public class SignupModel {
 	public void setActive(String active) {
 		this.active = active;
 	}
+
+	
 	
 	
 	

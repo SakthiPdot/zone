@@ -7,8 +7,29 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 		self.user ={};
 		self.submit = submit;
 		self.save = "saveclose";
+		/*self.user.role = {};*/
 		
 		fetchAllUser();
+		fetchAllUserRoles();
+		
+		$scope.orderTable = function(user) {
+			console.log('k');
+			console.log(user);
+			$scope.Table = user;
+		}
+		
+		function fetchAllUserRoles() {
+			UserService.fetchAllUserRoles()
+			 .then(
+					 	function(roles) {
+					 		self.roles = roles;
+					 		console.log('g');
+					 	}, function(errResponse) {
+					 		console.log('Err');
+					 	}
+				   );
+		}
+		
 		$scope.save = function(event) {
 			console.log("save button");
 			self.save = event.target.id;
@@ -37,6 +58,9 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 						.then(
 								function(res) {
 									console.log("if");
+									/*self.user.role.role_id = self.user.role_id;
+									delete self.user.role_id;
+									console.log(self.user.role.role_id);*/
 									console.log(self.user);
 									createUser(self.user);	
 								}								
