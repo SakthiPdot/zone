@@ -4,6 +4,7 @@ zoneApp.factory('UserService',['$http','$q', function($http,$q){
 				
 				createUser : createUser,
 				fetchAllUser : fetchAllUser,
+				checkUsername : checkUsername,
 				fetchAllUserRoles : fetchAllUserRoles
 		};
 		
@@ -61,5 +62,27 @@ zoneApp.factory('UserService',['$http','$q', function($http,$q){
 				     );
 			return deferred.promise;
 		}
+		
+		
+		function checkUsername(username) {
+			var deferred = $q.defer();
+			
+			$http({
+				
+					method : 'POST',
+					url : 'UsernameCheck',
+					data : username
+			})
+			
+					.then(
+								function(response) {
+									deferred.resolve(response.status);
+								}, function(errResponse) {
+									deferred.reject(errResponse);
+								}
+					      );
+			         return deferred.promise;
+		  }
+		
 	
 }]);

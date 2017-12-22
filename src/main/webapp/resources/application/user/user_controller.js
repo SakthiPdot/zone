@@ -2,6 +2,8 @@
 zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogService', function($scope,UserService,ConfirmDialogService) {
 	
 		
+		$scope.nameWrong = false;
+		
 		var self = this;
 		self.userall = [];
 		self.user ={};
@@ -82,6 +84,27 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 							console.log("Err")
 						}
 				      );
+		}
+		
+		//======== Check Username =========//
+		
+		self.checkUsername = function checkUsername(username) {
+			UserService.checkUsername(username)
+				.then(
+						function(response) {
+							if(response == "204") {
+								$scope.nameWrong = true;
+								self.user.username = null;
+								console.log('right');
+							} else {
+								$scope.nameWrong = false;
+							}
+				         }, function(errResponse) {
+				        	 $scope.nameWrong = false;
+				        	 self.user.username = null;
+				        	 console.log('err');
+				         }
+					);
 		}
 	
 }]);

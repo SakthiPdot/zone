@@ -83,4 +83,16 @@ public class UserDaoImpl implements UserDao{
 			}
 			    return "NOTAVAILABLE";
 		}
+
+		@Override
+		@Transactional
+		public String CheckUser(int clientid ,String username) {
+			@SuppressWarnings("unchecked")
+			List<UserModel> getUser = sessionFactory.getCurrentSession()
+					.createQuery("from UserModel where client_id ="+ clientid + " and obsolete = 'N' and active = 'Y' AND username IN('" + username.toUpperCase() +"', '" + username.toLowerCase()+"')").list();
+			if(!getUser.isEmpty() && getUser != null) {
+				return "AVAILABLE";
+			}
+			    return "NOTAVAILABLE";
+		}
 }

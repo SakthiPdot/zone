@@ -9,6 +9,15 @@
 			<link href="resources/angular/css/bootstrap-dialog.min.css">
 			<script type="text/javascript" src="resources/angular/js/angular.min.js"></script>
 			<script type="text/javascript" src="resources/angular/js/app.js"></script>
+	
+	<style type="text/css">
+	
+		.errorMsg{
+			color : red;
+		}
+		
+	</style>
+	
 	</head>
 	
 	<body data-ng-app="zoneApp" data-ng-controller="UserController as userctrl">
@@ -38,9 +47,11 @@
 			<form data-ng-submit="userctrl.submit()" name = "userForm">
 				
 				<input type="hidden" data-ng-model="userctrl.user.user_id">
+				<br>
 				Name<input type="text" data-ng-model="userctrl.user.name">
 				<br>
-				Username<input type="text" data-ng-model="userctrl.user.username">
+				Username<input type="text" data-ng-blur="userctrl.checkUsername(userctrl.user.username)" data-ng-model="userctrl.user.username">
+				<span class="errorMsg" data-ng-show="nameWrong"> This Username Already Choose Someone..! </span>
 				<br>
 				Password<input type="text" data-ng-model="userctrl.user.password">
 				<br>

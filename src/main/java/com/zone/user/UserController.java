@@ -88,5 +88,24 @@ public class UserController {
 		
 	}
 	
+	
+	@RequestMapping(value = "UsernameCheck", method = RequestMethod.POST)
+	public ResponseEntity<Void> CheckUsername(HttpServletRequest request, @RequestBody String username) {
+		
+		userInformation = new UserInformation(request);
+		String clientid = userInformation.getClientId();
+		
+		String userckecks = userDao.CheckUser(Integer.parseInt(clientid), username);
+		if(userckecks == "AVAILABLE") {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<Void> (HttpStatus.OK);
+		}
+		
+			
+	}
+	
+	
+	
 
 }

@@ -10,4 +10,8 @@ public interface UserDao {
 	public List<UserModel> getUserRegister(int clientid);
 	public String checkUserName(String username);
 	
+	//===Check User Name from User Dao ========//
+	
+	public String CheckUser(int clientid ,String username);
+	
 }
