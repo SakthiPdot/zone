@@ -33,6 +33,8 @@
 	
 	<a href="student"> Application</a><br>
 	<a href="user">User</a>
+	
+	<a href="${pageContext.servletContext.contextPath}/logout">Logout</a>
 
   <script src="resources/angular/js/jquery-1.11.1.min.js"></script>
   <script src="resources/common/js/popper.min.js"></script>

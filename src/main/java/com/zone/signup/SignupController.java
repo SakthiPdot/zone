@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
@@ -56,6 +57,14 @@ public class SignupController {
 			model.setViewName("login");
 			return model;
 			
+		}
+		
+		@RequestMapping(value="logout", method=RequestMethod.GET)
+		public ModelAndView logout(HttpServletRequest request) {
+			ModelAndView model = new ModelAndView();
+			request.getSession().invalidate();			
+			model.setViewName("login");
+			return model;
 		}
 		
 		@RequestMapping(value = "/sign_up", method=RequestMethod.GET)
