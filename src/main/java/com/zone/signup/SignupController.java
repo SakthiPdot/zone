@@ -89,7 +89,7 @@ public class SignupController {
 			signup.setActive("Y");
 			signupDao.saveOrUpdate(signup);
 			
-			System.out.println(""+signup);
+			System.out.println("ddddd"+signup);
 			
 			HttpSession session = request.getSession();				
 			session.setAttribute("names", signup.getUsername());

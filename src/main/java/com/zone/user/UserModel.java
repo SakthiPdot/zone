@@ -1,9 +1,15 @@
 package com.zone.user;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.zone.role.RoleModel;
 
 @Entity
 @Table(name = "tbl_user")
@@ -48,14 +54,15 @@ public class UserModel {
 		}
 
 		
-		
-		@Column(name = "role_id")
-		public int getRole_id() {
-			return role_id;
+		public RoleModel role;
+		@JoinColumn(name = "role_id")
+		@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE )
+		public RoleModel getRole_id() {
+			return role;
 		}
 
-		public void setRole_id(int role_id) {
-			this.role_id = role_id;
+		public void setRole_id(RoleModel role) {
+			this.role = role;
 		}
 
 		@Column(name = "name")

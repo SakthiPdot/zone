@@ -59,7 +59,8 @@ public class UserController {
 		Date date = new Date();
 		ModelAndView model = new ModelAndView();
 		user.setClient_id(Integer.parseInt(clientid));
-		user.setRole_id(1);
+		/*user.setRole_id(1);*/
+		/*user.setRole_id(user.role.getRole_id());*/
 		user.setObsolete("N");
 		user.setActive("Y");		
 		user.setCreated_date(dateFormat.format(date).toString());

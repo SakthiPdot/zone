@@ -28,16 +28,18 @@
 						<th>S.No</th>
 						<th data-ng-click="orderTable('name')">Name</th>
 						<th data-ng-click="orderTable('username')">Username</th>
+						<th>Role</th>
 						<th>Email</th>
 						<th>Mobile No</th>
 					</tr>
 				</thead>
 				
 				<tbody>
-					<tr data-ng-repeat = "user in userctrl.userall | orderBy:Table">
+					<tr data-ng-dblclick="userctrl.updateUser(user)" data-ng-repeat = "user in userctrl.userall | orderBy:Table">
 						<td>{{$index+1}}</td>
 					    <td>{{user.name}}</td>
 						<td>{{user.username}}</td>
+						<td>{{user.role.role_name}}</td>
 						<td>{{user.email}}</td>
 						<td>{{user.mobileno}}</td>
 					</tr>

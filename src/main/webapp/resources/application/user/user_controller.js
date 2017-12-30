@@ -9,7 +9,8 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 		self.user ={};
 		self.submit = submit;
 		self.save = "saveclose";
-		/*self.user.role = {};*/
+		self.updateUser = updateUser;
+		self.user.role = {};
 		
 		fetchAllUser();
 		fetchAllUserRoles();
@@ -60,9 +61,9 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 						.then(
 								function(res) {
 									console.log("if");
-									/*self.user.role.role_id = self.user.role_id;
+									self.user.role.role_id = self.user.role_id;
 									delete self.user.role_id;
-									console.log(self.user.role.role_id);*/
+									console.log(self.user.role.role_id);
 									console.log(self.user);
 									createUser(self.user);	
 								}								
@@ -107,4 +108,10 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 					);
 		}
 	
+		//======== Update User =========//
+		
+		function updateUser(user) {
+			console.log('d');
+			self.user = user;
+		}
 }]);
