@@ -12,6 +12,8 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 		self.updateUser = updateUser;
 		self.user.role = {};
 		
+		self.reset = reset ;
+		
 		fetchAllUser();
 		fetchAllUserRoles();
 		
@@ -20,6 +22,13 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 			console.log(user);
 			$scope.Table = user;
 		}
+		
+		
+		
+		function reset() {
+			self.user = {};
+		}
+		
 		
 		function fetchAllUserRoles() {
 			UserService.fetchAllUserRoles()
@@ -70,6 +79,10 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 							);
 			} else {
 				console.log("else");
+				self.user.role.role_id = self.user.role_id;
+				delete self.user.role_id;
+				editUser(self.user);
+				console.log("else1");
 			}
 		}
 		
@@ -108,10 +121,31 @@ zoneApp.controller('UserController',['$scope','UserService','ConfirmDialogServic
 					);
 		}
 	
-		//======== Update User =========//
+		//======== Update View  User =========//
 		
 		function updateUser(user) {
 			console.log('d');
 			self.user = user;
+			self.user.role_id = user.role.role_id;
 		}
+		
+		//=====Edit User ===========//
+		
+		function editUser(user) {
+			UserService.updateUser(user)
+				.then(
+						function (user) {
+							console.log(user);
+							console.log('success');
+							reset();
+							
+						},
+						
+						function(errResponse) {
+							console.log('failure');
+						}
+				      );
+		}
+		
+		//====== Edit User ===========//
 }]);

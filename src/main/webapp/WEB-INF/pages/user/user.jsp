@@ -66,6 +66,7 @@
 				Mobile No <input type="text" data-ng-model="userctrl.user.mobileno">
 				<br>
 				<button data-ng-click="save($event)" type="submit">Save</button>
+				<button type="button" onclick="location.href='User List'; valid = true">Excel</button>
 			</form>
 			<br>
 			

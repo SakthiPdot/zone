@@ -14,9 +14,11 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
 
 @EnableWebMvc
@@ -84,6 +86,14 @@ public class AppConfig {
 	}
 	
 	
+	@Bean
+	public ViewResolver getCsvViewResolver(){
+		ResourceBundleViewResolver resolver = new ResourceBundleViewResolver();
+		resolver.setBasename("views");
+		resolver.setOrder(1);
+		return resolver;
+		
+	}
 	
 	@Bean
 	public ContextLoaderListener contextLoaderListener(){

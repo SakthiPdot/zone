@@ -102,11 +102,48 @@ public class UserController {
 		} else {
 			return new ResponseEntity<Void> (HttpStatus.OK);
 		}
-		
+				
 			
 	}
 	
 	
+	@RequestMapping(value = "/update_user", method = RequestMethod.POST)
+	public ResponseEntity<UserModel> updateuser(@RequestBody UserModel user, HttpServletRequest request){
+		
+		userInformation = new UserInformation(request);
+		String userid = userInformation.getUserId();
+		
+		try{
+			System.err.println("try");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			Date date = new Date();
+			user.setUpdated_date(dateFormat.format(date));
+			user.setUpdated_user(Integer.parseInt(userid));
+			userDao.saveOrUpdate(user);
+			return new ResponseEntity<UserModel> (user,HttpStatus.OK);
+			
+		} catch (Exception e) {
+			System.err.println("catch");
+			return new ResponseEntity<UserModel> (HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+			
+	}
+
+	
+	//====== Excel Format Begin============//
+	
+	@RequestMapping(value = "User List", method = RequestMethod.GET)
+	public ModelAndView downloadExcelUser(HttpServletRequest request) {
+		userInformation = new UserInformation(request);
+		String clientid = userInformation.getClientId();
+		System.err.println("fffffff");
+		List<UserModel> userList = userDao.getUserRegister(Integer.parseInt(clientid));
+		System.err.println("fffffff");
+		return new ModelAndView("userExcel", "userList", userList);
+		
+	}
+	
+	//====== Excel Format End =============//
 	
 
 }

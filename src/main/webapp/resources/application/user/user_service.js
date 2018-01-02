@@ -3,6 +3,7 @@ zoneApp.factory('UserService',['$http','$q', function($http,$q){
 		var factory = {
 				
 				createUser : createUser,
+				updateUser : updateUser,
 				fetchAllUser : fetchAllUser,
 				checkUsername : checkUsername,
 				fetchAllUserRoles : fetchAllUserRoles
@@ -83,6 +84,32 @@ zoneApp.factory('UserService',['$http','$q', function($http,$q){
 					      );
 			         return deferred.promise;
 		  }
+		
+			function updateUser(user) {
+				
+				var deferred = $q.defer();
+				
+				$http({
+					
+						method : 'POST',
+						url : 'update_user',
+						data : user
+					
+				})
+				
+				.then(
+						function(response) {
+							console.log('2');
+							console.log(response.data);
+							console.log(response.status);
+							deferred.resolve(response.data);
+						}, function(errResponse) {
+							console.log('1');
+						}
+				      );
+				return deferred.promise;
+				
+			}
 		
 	
 }]);
